@@ -6,14 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.bottomnavigationcat.MainActivity
 import com.example.bottomnavigationcat.R
 import com.example.bottomnavigationcat.databinding.FragmentDashboardBinding
+import com.example.bottomnavigationcat.di.MainComponent
+import com.example.bottomnavigationcat.ui.blank.BlankViewModel
+import javax.inject.Inject
 
 class DashboardFragment : Fragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val dashboardViewModel: DashboardViewModel by viewModels {
+        viewModelFactory
+    }
+    lateinit var mainComponent: MainComponent
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+ //   private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,8 +36,10 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        mainComponent = (requireActivity() as MainActivity).mainComponent
+        mainComponent.inject(this)
+    //    dashboardViewModel =
+      //      ViewModelProvider(this).get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root

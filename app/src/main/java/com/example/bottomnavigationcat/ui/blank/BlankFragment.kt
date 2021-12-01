@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.bottomnavigationcat.MainActivity
+import com.example.bottomnavigationcat.MainApp
 import com.example.bottomnavigationcat.R
+import com.example.bottomnavigationcat.di.MainComponent
 import javax.inject.Inject
 
 class BlankFragment : Fragment() {
@@ -17,6 +19,7 @@ class BlankFragment : Fragment() {
     private val viewModel: BlankViewModel by viewModels {
         viewModelFactory
     }
+    lateinit var mainComponent: MainComponent
 
     companion object {
         fun newInstance() = BlankFragment()
@@ -28,6 +31,8 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mainComponent = (requireActivity() as MainActivity).mainComponent
+        mainComponent.inject(this)
         return inflater.inflate(R.layout.blank_fragment, container, false)
     }
 
@@ -35,7 +40,7 @@ class BlankFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
      //   viewModel = ViewModelProvider(this).get(BlankViewModel::class.java)
         (requireContext() as MainActivity).mainComponent.inject(this)
-        viewModel.liveData.observe(viewLifecycleOwner,{ println(it)})
+        viewModel.repository.liveData.observe(viewLifecycleOwner,{ println(it)})
     }
 
 }
