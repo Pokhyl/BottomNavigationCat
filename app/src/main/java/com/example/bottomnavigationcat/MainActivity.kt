@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 lateinit var mainComponent: MainComponent
     override fun onCreate(savedInstanceState: Bundle?) {
-        mainComponent = (applicationContext as MainApp).mainCompjnent
+        mainComponent = (applicationContext as MainApp).mainComponent
         mainComponent.inject(this)
         super.onCreate(savedInstanceState)
 

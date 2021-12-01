@@ -5,10 +5,10 @@ import com.example.bottomnavigationcat.di.DaggerMainComponent
 import com.example.bottomnavigationcat.di.MainComponent
 
 class MainApp: Application() {
-    lateinit var mainCompjnent:MainComponent
+    lateinit var mainComponent:MainComponent
     override fun onCreate() {
         super.onCreate()
-        mainCompjnent = DaggerMainComponent
+        mainComponent = DaggerMainComponent
             .builder()
             .build()
     }
