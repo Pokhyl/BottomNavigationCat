@@ -10,6 +10,7 @@ class MainApp: Application() {
         super.onCreate()
         mainComponent = DaggerMainComponent
             .builder()
+            .application(this)
             .build()
     }
 }

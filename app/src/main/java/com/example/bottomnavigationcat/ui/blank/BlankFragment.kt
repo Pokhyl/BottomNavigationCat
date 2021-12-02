@@ -41,6 +41,7 @@ class BlankFragment : Fragment() {
      //   viewModel = ViewModelProvider(this).get(BlankViewModel::class.java)
         (requireContext() as MainActivity).mainComponent.inject(this)
         viewModel.repository.liveData.observe(viewLifecycleOwner,{ println(it)})
+        viewModel.liveData.observe(viewLifecycleOwner,{ println(it.size)})
     }
 
 }
