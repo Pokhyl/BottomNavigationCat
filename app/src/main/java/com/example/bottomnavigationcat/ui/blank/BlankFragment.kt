@@ -39,6 +39,11 @@ class BlankFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
      //   viewModel = ViewModelProvider(this).get(BlankViewModel::class.java)
+      //  val creator:ViewModelProvider = creators[modelClass] ?: creators.entries.firstOrNull {
+//            modelClass.isAssignableFrom(it.key)
+//        }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
+//        @Suppress("UNCHECKED_CAST")
+//        return creator.get() as T
         (requireContext() as MainActivity).mainComponent.inject(this)
         viewModel.repository.liveData.observe(viewLifecycleOwner,{ println(it)})
         viewModel.liveData.observe(viewLifecycleOwner,{ println(it.size)})

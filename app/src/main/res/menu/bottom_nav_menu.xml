@@ -19,6 +19,9 @@
         android:id="@+id/blank_fragment"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="Fragment" />
+    <item
+        android:id="@+id/loginFragment"
+        android:title="Iogin" />
 
 
 </menu>
