@@ -45,7 +45,8 @@ class BlankFragment : Fragment() {
 //        @Suppress("UNCHECKED_CAST")
 //        return creator.get() as T
         (requireContext() as MainActivity).mainComponent.inject(this)
-        viewModel.repository.liveData.observe(viewLifecycleOwner,{ println(it)})
+        viewModel.loadBookListFromDatabase()
+        viewModel.liveData.observe(viewLifecycleOwner,{ println(it+"!!!!!!!!!!!!!!")})
         viewModel.liveData.observe(viewLifecycleOwner,{ println(it.size)})
     }
 

@@ -2,6 +2,7 @@ package com.example.clone.DI
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.bottomnavigationcat.ui.BlankFragment2ViewModel
 import com.example.bottomnavigationcat.ui.blank.BlankViewModel
 import com.example.bottomnavigationcat.ui.dashboard.DashboardViewModel
 import com.example.bottomnavigationcat.ui.home.HomeViewModel
@@ -33,5 +34,9 @@ abstract class ViewModelModule {
     @ViewModelKey(NotificationsViewModel::class)
     abstract fun  bindsBaseSetupViewModel4(baseSetupViewModel: NotificationsViewModel):ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(BlankFragment2ViewModel::class)
+    abstract fun  bindsBaseSetupViewModel5(baseSetupViewModel: BlankFragment2ViewModel):ViewModel
 
 }

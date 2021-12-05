@@ -20,12 +20,12 @@ private val handler = CoroutineExceptionHandler { _, exception ->
     Log.e("TAG", "CoroutineExceptionHandler got", exception)
 }
 
-    private val scope = viewModelScope + handler + Dispatchers.Default
+    private val scope = viewModelScope + handler + Dispatchers.IO
 
     fun loadBookListFromDatabase() {
 
         scope.launch {
-            liveData.value = repository.getAllBooks()
+            liveData.postValue(repository.getAllBooks())
 
         }
     }

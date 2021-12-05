@@ -2,6 +2,7 @@ package com.example.bottomnavigationcat.di
 
 import android.app.Application
 import com.example.bottomnavigationcat.MainActivity
+import com.example.bottomnavigationcat.ui.BlankFragment2
 import com.example.bottomnavigationcat.ui.blank.BlankFragment
 import com.example.bottomnavigationcat.ui.dashboard.DashboardFragment
 import com.example.bottomnavigationcat.ui.home.HomeFragment
@@ -23,4 +24,5 @@ interface MainComponent {
    fun inject(dashboardFragment: DashboardFragment)
    fun inject(homeFragment: HomeFragment)
    fun inject(notificationsFragment: NotificationsFragment)
+   fun injekt(blankFragment2: BlankFragment2)
 }
