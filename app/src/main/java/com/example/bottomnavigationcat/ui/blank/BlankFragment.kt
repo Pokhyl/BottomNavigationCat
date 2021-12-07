@@ -7,13 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnavigationcat.MainActivity
 import com.example.bottomnavigationcat.MainApp
 import com.example.bottomnavigationcat.R
+import com.example.bottomnavigationcat.databinding.BlankFragmentBinding
 import com.example.bottomnavigationcat.di.MainComponent
+import com.example.bottomnavigationcat.model.Book
+import com.example.bottomnavigationcat.ui.recycler.BookAdapter
+import kotlinx.coroutines.NonDisposableHandle.parent
 import javax.inject.Inject
 
 class BlankFragment : Fragment() {
+    private var _binding: BlankFragmentBinding? = null
+    private val binding get() = _binding!!
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: BlankViewModel by viewModels {
@@ -31,9 +38,11 @@ class BlankFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = BlankFragmentBinding.inflate(inflater, container, false)
+
         mainComponent = (requireActivity() as MainActivity).mainComponent
         mainComponent.inject(this)
-        return inflater.inflate(R.layout.blank_fragment, container, false)
+    return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -45,9 +54,16 @@ class BlankFragment : Fragment() {
 //        @Suppress("UNCHECKED_CAST")
 //        return creator.get() as T
         (requireContext() as MainActivity).mainComponent.inject(this)
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL, false)
+
         viewModel.loadBookListFromDatabase()
-        viewModel.liveData.observe(viewLifecycleOwner,{ println(it+"!!!!!!!!!!!!!!")})
+        viewModel.liveData.observe(viewLifecycleOwner,{   binding.recyclerView.adapter = BookAdapter(
+            it as MutableList<Book>
+        )})
         viewModel.liveData.observe(viewLifecycleOwner,{ println(it.size)})
+
+
+
     }
 
 }

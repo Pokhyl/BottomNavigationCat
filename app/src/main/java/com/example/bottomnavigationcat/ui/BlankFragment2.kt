@@ -65,14 +65,15 @@ val autoTextChengeListener = object :TextWatcher{
     }
 
     override fun afterTextChanged(p0: Editable?) {
-//        var x =p0?.length ?:0
-//        if (x>0) {
-            viewModel.setBook(
-                title = title.text.toString(),
-                author = author.text.toString(),
-                description = description.text.toString(),
-                published = 0
-            )
+//       var x =p0?.length ?:0
+//       if (x>0) {
+           viewModel.setBook(
+               title = title.text.toString(),
+               author = author.text.toString(),
+               description = description.text.toString(),
+               published = 0
+           )
+       
         }
 //        viewModel.bookLiveData.value = Book(title = title.text.toString(),
 //                author = author.text.toString(),
