@@ -26,7 +26,11 @@
         android:id="@+id/blank_fragment"
         android:name="com.example.bottomnavigationcat.ui.blank.BlankFragment"
         android:label="blank_fragment"
-        tools:layout="@layout/blank_fragment" />
+        tools:layout="@layout/blank_fragment" >
+        <action
+            android:id="@+id/action_blank_fragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.bottomnavigationcat.ui.BlankFragment2"

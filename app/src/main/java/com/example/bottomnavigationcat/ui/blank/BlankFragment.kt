@@ -55,11 +55,13 @@ class BlankFragment : Fragment() {
 //        return creator.get() as T
         (requireContext() as MainActivity).mainComponent.inject(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireActivity(),LinearLayoutManager.VERTICAL, false)
+        var bookAdapter = BookAdapter()
+        binding.recyclerView.adapter = bookAdapter
+
+
 
         viewModel.loadBookListFromDatabase()
-        viewModel.liveData.observe(viewLifecycleOwner,{   binding.recyclerView.adapter = BookAdapter(
-            it as MutableList<Book>
-        )})
+        viewModel.liveData.observe(viewLifecycleOwner,{  bookAdapter.setData(it) })
         viewModel.liveData.observe(viewLifecycleOwner,{ println(it.size)})
 
 

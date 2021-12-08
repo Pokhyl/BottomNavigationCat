@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.bottomnavigationcat.MainActivity
 import com.example.bottomnavigationcat.databinding.FragmentLoginBinding
+import com.example.bottomnavigationcat.model.Book
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
@@ -32,6 +33,7 @@ class BlankFragment2 : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         (requireActivity() as MainActivity).mainComponent.injekt(this)
         binding = FragmentLoginBinding.inflate(inflater, container,false)
         return binding!!.root
@@ -39,6 +41,8 @@ class BlankFragment2 : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val book: Book? = arguments?.getParcelable("book")
+        println(""+book+"!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 //        viewModel = ViewModelProvider(this).get(BlankFragment2ViewModel::class.java)
         var author = binding!!.author
         author.addTextChangedListener(autoTextChengeListener)
