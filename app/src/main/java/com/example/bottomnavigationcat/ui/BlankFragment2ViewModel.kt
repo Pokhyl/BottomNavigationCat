@@ -35,4 +35,13 @@ fun setBook(title: String, author: String, description: String, published: Int) 
 
         }
     }
+    fun updateBookToDatabase( id:Int) {
+        println(bookLiveData.value)
+        scope.launch {
+            bookLiveData.value?.let {
+                it.id = id
+                repository.updateBook(it) }
+
+        }
+    }
 }

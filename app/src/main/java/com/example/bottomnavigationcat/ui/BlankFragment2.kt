@@ -43,9 +43,11 @@ class BlankFragment2 : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val book: Book? = arguments?.getParcelable("book")
         println(""+book+"!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 //        viewModel = ViewModelProvider(this).get(BlankFragment2ViewModel::class.java)
         var author = binding!!.author
         author.addTextChangedListener(autoTextChengeListener)
+
         var title = binding!!.title
         title.addTextChangedListener(autoTextChengeListener)
         var description = binding!!.description
@@ -53,9 +55,22 @@ class BlankFragment2 : Fragment() {
         var published = binding!!.published
         published .addTextChangedListener(autoTextChengeListener)
         var button = binding!!.button
-        button.setOnClickListener {
-            viewModel.saveBookToDatabase()
-            println("click")
+
+
+        if  (book != null) {
+            author.text = Editable.Factory.getInstance().newEditable(book.author?:"")
+            title.text = Editable.Factory.getInstance().newEditable(book.title?:"")
+            description.text = Editable.Factory.getInstance().newEditable(book.description?:"")
+            published.text = Editable.Factory.getInstance().newEditable((book.published?:0).toString())
+            button.setOnClickListener {
+                viewModel.updateBookToDatabase(book.id)
+                println("click")
+            }
+        } else {
+            button.setOnClickListener {
+                viewModel.saveBookToDatabase()
+                println("click")
+            }
         }
 
     }
