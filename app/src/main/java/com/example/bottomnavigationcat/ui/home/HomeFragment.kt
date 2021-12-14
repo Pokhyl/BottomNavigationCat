@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.bottomnavigationcat.MainActivity
 import com.example.bottomnavigationcat.MainApp
 import com.example.bottomnavigationcat.R
@@ -45,8 +47,15 @@ lateinit var mainComponent: MainComponent
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+      textView.setOnClickListener{homeViewModel.userClicksOnButton()}
+        homeViewModel.navigateToDetails.observe(viewLifecycleOwner, Observer {
+
+        if (it.hasBeenHandled) {
+
+             it.getContentIfNotHandled()?.let { // Only proceed if the event has never been handled
+                 binding.textHome.findNavController().navigate(R.id.loginFragment)
+             }
+        }
         })
         return root
     }

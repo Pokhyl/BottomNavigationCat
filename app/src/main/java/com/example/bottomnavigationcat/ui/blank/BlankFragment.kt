@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bottomnavigationcat.MainActivity
@@ -17,6 +18,8 @@ import com.example.bottomnavigationcat.model.Book
 import com.example.bottomnavigationcat.ui.recycler.BookAdapter
 import kotlinx.coroutines.NonDisposableHandle.parent
 import javax.inject.Inject
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 
 class BlankFragment : Fragment() {
     private var _binding: BlankFragmentBinding? = null
@@ -58,6 +61,17 @@ class BlankFragment : Fragment() {
         var bookAdapter = BookAdapter()
         binding.recyclerView.adapter = bookAdapter
 
+        val swipeToDeleteCallback = object :  SwipeToDeleteCallback() {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val pos = viewHolder.adapterPosition
+//                modelList.removeAt(pos)
+//                bookAdapter.notifyItemRemoved(pos)
+                Toast.makeText(requireContext(),pos.toString()+"!!",Toast.LENGTH_LONG).show()
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
 
         viewModel.loadBookListFromDatabase()
