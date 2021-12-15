@@ -64,6 +64,8 @@ class BlankFragment : Fragment() {
         val swipeToDeleteCallback = object :  SwipeToDeleteCallback() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.adapterPosition
+                var book = bookAdapter.list[pos]
+                viewModel.delete(book)
 //                modelList.removeAt(pos)
 //                bookAdapter.notifyItemRemoved(pos)
                 Toast.makeText(requireContext(),pos.toString()+"!!",Toast.LENGTH_LONG).show()

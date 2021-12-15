@@ -29,4 +29,11 @@ private val handler = CoroutineExceptionHandler { _, exception ->
 
         }
     }
+    fun delete(book: Book) {
+
+        scope.launch {
+            repository.deleteBook(book)
+
+        }
+    }
 }
