@@ -9,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.example.bottomnavigationcat.MainActivity
+import com.example.bottomnavigationcat.R
 import com.example.bottomnavigationcat.databinding.FragmentLoginBinding
 import com.example.bottomnavigationcat.model.Book
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -72,6 +74,13 @@ class BlankFragment2 : Fragment() {
                 println("click")
             }
         }
+        viewModel.navigateToBlankFragment.observe(viewLifecycleOwner,{
+            if (it){
+                binding!!.container.findNavController().navigate(R.id.blank_fragment)
+                viewModel.navigateToDetailsHandled()
+            }
+        })
+
 
     }
 val autoTextChengeListener = object :TextWatcher{

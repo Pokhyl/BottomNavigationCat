@@ -1,6 +1,7 @@
 package com.example.bottomnavigationcat.ui
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,7 +16,18 @@ import javax.inject.Inject
 class BlankFragment2ViewModel @Inject constructor(var repository: BlankRepository)  : ViewModel() {
 
     var bookLiveData:MutableLiveData<Book> = MutableLiveData()
+    private val _navigateToBlankFragment = MutableLiveData<Boolean>()
 
+    val navigateToBlankFragment : LiveData<Boolean>
+        get() = _navigateToBlankFragment
+
+
+    fun userClicksOnButton() {
+        _navigateToBlankFragment.value = true
+    }
+    fun navigateToDetailsHandled() {
+        _navigateToBlankFragment.value = false
+    }
     private val handler = CoroutineExceptionHandler { _, exception ->
         Log.e("TAG", "CoroutineExceptionHandler got", exception)
     }
@@ -34,6 +46,7 @@ fun setBook(title: String, author: String, description: String, published: Int) 
             bookLiveData.value?.let { repository.addNewBook(it) }
 
         }
+        userClicksOnButton()
     }
     fun updateBookToDatabase( id:Int) {
         println(bookLiveData.value)
@@ -43,6 +56,6 @@ fun setBook(title: String, author: String, description: String, published: Int) 
                 repository.updateBook(it) }
 
         }
-
+        userClicksOnButton()
     }
 }

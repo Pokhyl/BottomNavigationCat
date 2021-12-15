@@ -7,18 +7,18 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-//    private val _navigateToDetails = MutableLiveData<Boolean>()
-//
-//    val navigateToDetails : LiveData<Boolean>
-//        get() = _navigateToDetails
-//
-//
-//    fun userClicksOnButton() {
-//        _navigateToDetails.value = true
-//    }
-//    fun navigateToDetailsHandled() {
-//        _navigateToDetails.value = false
-//    }
+    private val _navigateToDetails = MutableLiveData<Boolean>()
+
+    val navigateToDetails : LiveData<Boolean>
+        get() = _navigateToDetails
+
+
+    fun userClicksOnButton() {
+        _navigateToDetails.value = true
+    }
+    fun navigateToDetailsHandled() {
+        _navigateToDetails.value = false
+    }
 
 
 
@@ -32,13 +32,17 @@ class HomeViewModel @Inject constructor() : ViewModel() {
 //    fun userClicksOnButton() {
 //        _navigateToDetails.call()
 //    }
-private val _navigateToDetails = MutableLiveData<Event<Boolean>>()
-
-    val navigateToDetails : LiveData<Event<Boolean>>
-        get() = _navigateToDetails
 
 
-    fun userClicksOnButton() {
-        _navigateToDetails.value = Event(true)  // Trigger the event by setting a new Event as a new value
-    }
+
+
+//private val _navigateToDetails = MutableLiveData<Event<Boolean>>()
+//
+//    val navigateToDetails : LiveData<Event<Boolean>>
+//        get() = _navigateToDetails
+//
+//
+//    fun userClicksOnButton() {
+//        _navigateToDetails.value = Event(true)  // Trigger the event by setting a new Event as a new value
+//    }
 }

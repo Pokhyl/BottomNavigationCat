@@ -50,11 +50,9 @@ lateinit var mainComponent: MainComponent
       textView.setOnClickListener{homeViewModel.userClicksOnButton()}
         homeViewModel.navigateToDetails.observe(viewLifecycleOwner, Observer {
 
-        if (it.hasBeenHandled) {
-
-             it.getContentIfNotHandled()?.let { // Only proceed if the event has never been handled
-                 binding.textHome.findNavController().navigate(R.id.loginFragment)
-             }
+        if (it) {
+            binding.textHome.findNavController().navigate(R.id.home)
+            homeViewModel.navigateToDetailsHandled()
         }
         })
         return root
